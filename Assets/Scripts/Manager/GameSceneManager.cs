@@ -1,10 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager Instance;
     public CharacterData characterData;
+
+    //UI Manager관련 변수
+    [Header("Character and Name Change UI")]
+    [SerializeField] private GameObject nameInputPanel; // 이름변경 버튼 후 팝업 패널
+    [SerializeField] private Button openNameChangeButton; // 이름 변경 버튼
+    [SerializeField] private Button openCharacterSelectButton; // 캐릭터 선택 버튼
+
+    public bool isMainSceneLoaded = false; //메인씬이 이미 로드 되었는지 여부확인을 위한 변수
 
     private void Awake()
     {
@@ -19,8 +29,51 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        InitializeUIListeners();       
+    }
+
+    private void OnEnable()
+    {
+        //씬이 전환된 이후 다시 UI리스너를 초기화 해야 함!!!!!
+        InitializeUIListeners();
+    }
+
+    //리스너 관리..
+    private void InitializeUIListeners()
+    {
+        if (openNameChangeButton != null)
+        {
+            //기존 리스너 제거 후 다시 추가(중복 방지)
+            openNameChangeButton.onClick.RemoveAllListeners();
+            openNameChangeButton.onClick.AddListener(OpenNameInputPanel);
+        }
+    }
+
+    public void OpenNameInputPanel()
+    {
+        if (nameInputPanel != null)
+        {
+            nameInputPanel.SetActive(true);
+            Debug.Log("Name Input Panel Opened");
+        }
+    }
+
+    public void CloseAllPanel()
+    {
+        nameInputPanel.SetActive(false);
+        
+    }
+
+    //로드씬
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("MainScene");
-    }
+        if (!isMainSceneLoaded)
+        {
+            SceneManager.LoadScene("MainScene");
+            isMainSceneLoaded = true; //메인씬 로드를 감지하고 표시
+            CloseAllPanel();
+        }
+    }   
 }

@@ -8,4 +8,5 @@ public class CharacterData : ScriptableObject
 {
     public string playerName;
     public int selectedCharacterID;
+    public Vector2 characterPosition;
 }

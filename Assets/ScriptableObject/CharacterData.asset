@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe96f0abe7ff72d40ba6bdd2625f0fac, type: 3}
   m_Name: CharacterData
   m_EditorClassIdentifier: 
-  playerName: dsf
-  selectedCharacterID: 1
+  playerName: "\u3147\u3139"
+  selectedCharacterID: 0
+  characterPosition: {x: -2.1938338, y: 1.7842726}

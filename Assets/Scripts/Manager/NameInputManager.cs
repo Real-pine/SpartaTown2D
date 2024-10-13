@@ -15,7 +15,7 @@ public class NameInputManager : MonoBehaviour
     [SerializeField] private int maxNameLength = 10;
     [SerializeField] private CharacterData characterData; //ScriptableObject 참조(캐릭터 데이터 저장용)
 
-    //에러팝업관련변수
+    // 에러팝업관련변수
     [SerializeField] private GameObject errorPopup;
     [SerializeField] private TMP_Text errorMessageText;
     [SerializeField] private Button errorPopupCloseButton;
@@ -25,6 +25,7 @@ public class NameInputManager : MonoBehaviour
     [SerializeField] private Image selectedCharacterImage;
     [SerializeField] private GameObject characterSelectionPopup;
     [SerializeField] private CharacterOption[] characterOptions;
+
 
 
     private void Start()
@@ -72,8 +73,15 @@ public class NameInputManager : MonoBehaviour
 
     private void OnCharacterSelected(CharacterOption option)
     {
-        SetSelectedCharacter(option);
-        characterSelectionPopup.SetActive(false);
+        SetSelectedCharacter(option); //캐릭터 데이터 업데이트
+        characterSelectionPopup.SetActive(false); //팝업 닫기
+
+        //캐릭터 변경사항 저장
+        CharacterSpawner characterSpawner = FindObjectOfType<CharacterSpawner>();
+        if(characterSpawner != null)
+        {
+            characterSpawner.UpdateCharacter();
+        }
     }
 
     private void SetSelectedCharacter(CharacterOption option)
@@ -84,7 +92,15 @@ public class NameInputManager : MonoBehaviour
 
     private void OpenCharacterSelectionPopup()
     {
+        //팝업 열기 전에 모든 패널 초기화하여 충돌 방지
+        CloseAllPanels();
         characterSelectionPopup.SetActive(true);
+    }
+
+    private void CloseAllPanels()
+    {
+        characterSelectionPopup.SetActive(false );
+        errorPopup.SetActive(false );
     }
 
     private void CloseErrorPopup()
@@ -99,8 +115,22 @@ public class NameInputManager : MonoBehaviour
         if (IsValidname(inputName))
         {
             SaveName(inputName);
-            //데이터관리를 위해 씬매니저를 만들어서 메인씬전환
-            GameSceneManager.Instance.LoadMainScene();
+
+            //메인씬이 로드되지 않은 경우에만 씬 전환을 실행
+            if(!GameSceneManager.Instance.isMainSceneLoaded)
+            {
+                //데이터관리를 위해 씬매니저를 만들어서 메인씬전환
+                GameSceneManager.Instance.LoadMainScene();
+                //메인 씬으로 전환 시 selectedCharacterImage를 비활성화
+                selectedCharacterImage.gameObject.SetActive(false);
+            }
+            else
+            {
+                //메인씬에서는 이름이 변경되더라도 씬 전환을 하지 않음
+                //단순히 패널 UI닫기
+                GameSceneManager.Instance.CloseAllPanel(); 
+                CloseAllPanels();
+            }
         }
         else
         {
