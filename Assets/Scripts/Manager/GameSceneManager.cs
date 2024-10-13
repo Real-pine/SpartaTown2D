@@ -22,6 +22,7 @@ public class GameSceneManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // 씬 로드 완료 후 이벤트
         }
         else
         {
@@ -34,9 +35,44 @@ public class GameSceneManager : MonoBehaviour
         InitializeUIListeners();       
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            isMainSceneLoaded=true;
+            Debug.Log("MainScene has been loaded, isMainSceneLoaded set to true");
+        }
+
+        //씬 로드 완료 후 CharacterSpawner에서 캐릭터 생성
+        CharacterSpawner characterSpawner = FindObjectOfType<CharacterSpawner>();
+        if (characterSpawner != null)
+        {
+            characterSpawner.SpawnPlayerInMainScene();
+        }
+    }
+
+    //로드씬
+    public void LoadMainScene()
+    {
+        if (!isMainSceneLoaded)
+        {
+            SceneManager.LoadScene("MainScene");
+            CloseAllPanel();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+
+
     private void OnEnable()
     {
-        //씬이 전환된 이후 다시 UI리스너를 초기화 해야 함!!!!!
+        //씬이 전환된 이후 다시 UI리스너를 초기화 
         InitializeUIListeners();
     }
 
@@ -66,14 +102,4 @@ public class GameSceneManager : MonoBehaviour
         
     }
 
-    //로드씬
-    public void LoadMainScene()
-    {
-        if (!isMainSceneLoaded)
-        {
-            SceneManager.LoadScene("MainScene");
-            isMainSceneLoaded = true; //메인씬 로드를 감지하고 표시
-            CloseAllPanel();
-        }
-    }   
 }
