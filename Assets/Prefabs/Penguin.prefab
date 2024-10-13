@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6151831561036373627}
   - component: {fileID: 539668511014109941}
   - component: {fileID: 8003765356279476848}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 8940189113558104975}
   m_Layer: 0
   m_Name: Penguin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 8828333839256292407}
   - component: {fileID: 2549090587187270908}
   - component: {fileID: 917359758179016039}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

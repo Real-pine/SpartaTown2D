@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9082499201279049480}
   - component: {fileID: 3354639262982422764}
   - component: {fileID: 8154834491196228113}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 509413381426149224}
   - component: {fileID: 4422494590111137547}
   - component: {fileID: 7470876678353583443}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 6443222020997210829}
   m_Layer: 0
   m_Name: Knight
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
