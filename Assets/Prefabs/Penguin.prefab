@@ -115,9 +115,9 @@ GameObject:
   - component: {fileID: 8352391425280286102}
   - component: {fileID: 681464660896472743}
   - component: {fileID: 2440325038591498801}
-  - component: {fileID: 6055993557442627661}
   - component: {fileID: 4488875653465475125}
   - component: {fileID: 2342849068884833005}
+  - component: {fileID: 6439779305589845014}
   m_Layer: 0
   m_Name: Penguin
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 3030896045445858504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.8606049, z: -10.000393}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -265,18 +265,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6055993557442627661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3030896045445858504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 451897210aa30f54485e18b7e7325506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4488875653465475125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +290,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 2549090587187270908}
+--- !u!114 &6439779305589845014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030896045445858504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451897210aa30f54485e18b7e7325506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5949434456252443994
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 9051711347128209522}
   - component: {fileID: 8828333839256292407}
   - component: {fileID: 2549090587187270908}
+  - component: {fileID: 917359758179016039}
   m_Layer: 5
   m_Name: NameText
   m_TagString: Untagged
@@ -520,3 +521,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &917359758179016039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7188002825908780699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27bcd4ca7a4abc24da5ac91f5226a45a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: {x: 0, y: 1, z: 0}

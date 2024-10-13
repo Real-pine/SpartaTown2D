@@ -7,6 +7,14 @@ public class PlayerInputController : MainController
     private void Awake()
     {
         _camera = Camera.main;
+
+
+        //이름 UI 팔로우 설정
+        NameUIFollow uIFollow = GetComponent<NameUIFollow>();
+        if( uIFollow != null )
+        {
+            uIFollow.target = this.transform;
+        }
     }
 
     public void OnMove(InputValue value)
@@ -19,5 +27,7 @@ public class PlayerInputController : MainController
         Vector2 newAim = value.Get<Vector2>();
         Vector2 worldPos = _camera.ScreenToWorldPoint(newAim);
         newAim = (worldPos - (Vector2)transform.position).normalized;
+
+        CallLookEvent(newAim);
     }
 }

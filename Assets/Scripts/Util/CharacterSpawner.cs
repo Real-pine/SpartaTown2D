@@ -7,11 +7,13 @@ public class CharacterSpawner : MonoBehaviour
 {
     public CharacterData characterData;
     public GameObject[] characterPrefabs;
+    public CameraFollow cameraFollow; 
 
     private void Start()
     {
         SpawnPlayer();
     }
+
 
     private void SpawnPlayer()
     {
@@ -26,6 +28,25 @@ public class CharacterSpawner : MonoBehaviour
             {
                 playerInfo.SetPlayerName(characterData.playerName);
             }
+
+            //카메라 타겟 설정
+            Camera mainCamera = Camera.main;
+            if(mainCamera != null ) 
+                {
+                    CameraFollow cameraFollow = mainCamera.GetComponent<CameraFollow>();
+                    if(cameraFollow != null)
+                    {
+                        cameraFollow.target = playerObject.transform;
+                    }
+                }
+
+            //NameUI팔로우 설정
+            NameUIFollow nameUiFollow = playerObject.GetComponentInChildren<NameUIFollow>();
+            if(nameUiFollow != null)
+            {
+                nameUiFollow.target = playerObject.transform;
+            }
+
         }
     }
 }
