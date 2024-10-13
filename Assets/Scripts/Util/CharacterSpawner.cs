@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
@@ -68,6 +69,12 @@ public class CharacterSpawner : MonoBehaviour
         PlayerInfo playerInfo = currentPlayerObject.GetComponent<PlayerInfo>();
         if (playerInfo != null)
         {
+            if (playerInfo.nameText == null)
+            {
+                // 필요한 경우 동적할당
+                playerInfo.nameText = currentPlayerObject.GetComponentInChildren<TextMeshProUGUI>();
+            }
+
             playerInfo.SetPlayerName(characterData.playerName);
         }
 
@@ -104,6 +111,15 @@ public class CharacterSpawner : MonoBehaviour
     
     public void UpdateCharacter()
     {
+        if(currentPlayerObject != null)
+        {
+            PlayerInfo playerInfo = currentPlayerObject.GetComponent<PlayerInfo>();
+            if (playerInfo != null)
+            {
+                playerInfo.SetPlayerName(characterData.playerName);
+            }
+        }
+
         if (GameSceneManager.Instance.characterData != null && GameSceneManager.Instance.characterData.selectedCharacterID >= 0 && GameSceneManager.Instance.characterData.selectedCharacterID < characterPrefabs.Length)
         {
             Debug.Log($"Updating character with ID: {GameSceneManager.Instance.characterData.selectedCharacterID}");

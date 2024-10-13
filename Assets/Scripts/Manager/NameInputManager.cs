@@ -130,6 +130,12 @@ public class NameInputManager : MonoBehaviour
                 //단순히 패널 UI닫기
                 GameSceneManager.Instance.CloseAllPanel(); 
                 CloseAllPanels();
+                //메인씬에서 이름 변경 후 캐릭터 업데이트
+                CharacterSpawner characterSpawner = FindObjectOfType<CharacterSpawner>();
+                if (characterSpawner != null)
+                {
+                    characterSpawner.UpdateCharacter();
+                }
             }
         }
         else

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,16 +35,77 @@ public class GameSceneManager : MonoBehaviour
     {
         InitializeUIListeners();       
     }
-
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene")
         {
             isMainSceneLoaded=true;
             Debug.Log("MainScene has been loaded, isMainSceneLoaded set to true");
+
+            // 씬 로드 후 UI오브젝트 새로 찾기
+            nameInputPanel = FindInactiveObject("NameInputPanel");
+            openNameChangeButton = GameObject.Find("ChangeNameBtn")?.GetComponent<Button>();
+            openCharacterSelectButton = GameObject.Find("SwitchCharBtn")?.GetComponent<Button>();
+
+            //씬 로드 후 UI 리스너 재등록
+            InitializeUIListeners();
+            // Name Input Panel 상태를 다시 설정
+            if(nameInputPanel != null)
+            {
+                nameInputPanel.SetActive(false); //초기에는 비활성화 상태
+                Debug.Log("name input panel set to inactive after mainscene loaded");
+            }
         }
 
         //씬 로드 완료 후 CharacterSpawner에서 캐릭터 생성
+        CharacterSpawner characterSpawner = FindObjectOfType<CharacterSpawner>();
+        if (characterSpawner != null)
+        {
+            characterSpawner.SpawnPlayerInMainScene();
+        }
+    }
+
+    private void OnEnable()
+    {
+        //씬이 전환된 이후 다시 UI리스너를 초기화 
+        InitializeUIListeners();
+    }
+
+    //리스너 관리..
+    private void InitializeUIListeners()
+    {
+        if (openNameChangeButton != null)
+        {
+            //기존 리스너 제거 후 다시 추가(중복 방지)
+            openNameChangeButton.onClick.RemoveAllListeners();
+            openNameChangeButton.onClick.AddListener(OpenNameInputPanel);
+        }      
+    }
+    public void OpenNameInputPanel()
+    {
+        if (nameInputPanel != null)
+        {
+            nameInputPanel.SetActive(true);
+            Debug.Log("Name Input Panel Opened");
+        }
+    }
+
+    public void OnConfirmNameChange()
+    {
+        if(characterData != null )
+        {
+            string newName = characterData.name; //새로운 이름은 외부에서 설정된 후 호출되도록 변경
+        }
+
+        //이름 변경 후 캐릭터 재스폰
+        RespawnCharacter();
+
+        CloseAllPanel();
+    }
+
+    private void RespawnCharacter()
+    {
         CharacterSpawner characterSpawner = FindObjectOfType<CharacterSpawner>();
         if (characterSpawner != null)
         {
@@ -61,6 +123,15 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    public void CloseAllPanel()
+    {
+        if (nameInputPanel != null)
+        {
+            nameInputPanel.SetActive(false);
+            Debug.Log("Name input panel closed. curren states: " + nameInputPanel.activeSelf);
+        }
+    }
+
     private void OnDestroy()
     {
         if(Instance == this)
@@ -68,38 +139,22 @@ public class GameSceneManager : MonoBehaviour
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
-
-
-    private void OnEnable()
+    private GameObject FindInactiveObject(string objectName)
     {
-        //씬이 전환된 이후 다시 UI리스너를 초기화 
-        InitializeUIListeners();
-    }
+        GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
 
-    //리스너 관리..
-    private void InitializeUIListeners()
-    {
-        if (openNameChangeButton != null)
+        foreach (GameObject rootObject in rootObjects)
         {
-            //기존 리스너 제거 후 다시 추가(중복 방지)
-            openNameChangeButton.onClick.RemoveAllListeners();
-            openNameChangeButton.onClick.AddListener(OpenNameInputPanel);
+            Transform[] allTransforms = rootObject.GetComponentsInChildren<Transform>(true);
+            foreach (Transform t in allTransforms)
+            {
+                if (t.name == objectName)
+                {
+                    return t.gameObject;
+                }
+            }
         }
-    }
-
-    public void OpenNameInputPanel()
-    {
-        if (nameInputPanel != null)
-        {
-            nameInputPanel.SetActive(true);
-            Debug.Log("Name Input Panel Opened");
-        }
-    }
-
-    public void CloseAllPanel()
-    {
-        nameInputPanel.SetActive(false);
-        
+        return null;
     }
 
 }
