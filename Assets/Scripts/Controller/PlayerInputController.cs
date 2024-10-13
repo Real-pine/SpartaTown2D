@@ -8,6 +8,11 @@ public class PlayerInputController : MainController
     {
         _camera = Camera.main;
 
+        CameraFollow cameraFollow = _camera.GetComponent<CameraFollow>();
+        if (cameraFollow != null )
+        {
+            cameraFollow.target = this.transform;
+        }
 
         //이름 UI 팔로우 설정
         NameUIFollow uIFollow = GetComponent<NameUIFollow>();

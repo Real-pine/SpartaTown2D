@@ -260,13 +260,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2663236354162179073}
-  - component: {fileID: 4904586296850461475}
   - component: {fileID: 5999657125178404867}
   - component: {fileID: 7533476369693668033}
   - component: {fileID: 5830419973890397285}
   - component: {fileID: 6580376610448142810}
   - component: {fileID: 6035789332492135405}
   - component: {fileID: 8231213046313516826}
+  - component: {fileID: 6443222020997210829}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -291,27 +291,6 @@ Transform:
   - {fileID: 5416723156643508510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4904586296850461475
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6859609281381369814}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &5999657125178404867
 Rigidbody2D:
   serializedVersion: 4
@@ -371,13 +350,13 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.93, y: -0.34}
+  m_Offset: {x: 0, y: -0.34}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.75}
+    newSize: {x: 1, y: 1.75}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -451,6 +430,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451897210aa30f54485e18b7e7325506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6443222020997210829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859609281381369814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8869ae2a558c641a0e3db45697ab55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 1047596418728357414}
 --- !u!1 &8384729387388057476
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7634645870592585064}
   - component: {fileID: 1047596418728357414}
+  - component: {fileID: 2188602767196163968}
   m_Layer: 0
   m_Name: MainSprite
   m_TagString: Untagged
@@ -535,3 +528,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2188602767196163968
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384729387388057476}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d319e192a52e1a4096a0b4193072153, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
