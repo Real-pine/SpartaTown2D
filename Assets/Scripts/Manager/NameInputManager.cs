@@ -98,7 +98,8 @@ public class NameInputManager : MonoBehaviour
         if (IsValidname(inputName))
         {
             SaveName(inputName);
-            SceneManager.LoadScene("MainScene");
+            //데이터관리를 위해 씬매니저를 만들어서 메인씬전환
+            GameSceneManager.Instance.LoadMainScene();
         }
         else
         {
