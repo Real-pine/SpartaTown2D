@@ -33,7 +33,8 @@ public class NameInputManager : MonoBehaviour
         nameInputField.characterLimit = maxNameLength;
         //컨펌 버튼 연결
         confirmButton.onClick.AddListener(OnConfirmButtonClicked);
-        //초기 버튼 연결 상태
+        //컴펌 버튼 활성화
+        nameInputField.onValueChanged.AddListener(OnNameInputChanged);
         UpdateConfirmButtonState();
         //에러 팝업 확인 버튼에 이벤트 리스너 추가
         errorPopupCloseButton.onClick.AddListener(CloseErrorPopup);

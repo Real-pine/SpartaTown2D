@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MainController
 {
     private Camera _camera;
-    protected void Awake()
+    private void Awake()
     {
         _camera = Camera.main;
     }

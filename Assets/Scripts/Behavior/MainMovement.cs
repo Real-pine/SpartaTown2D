@@ -9,6 +9,13 @@ public class MainMovement : MonoBehaviour // 실제로 움직임을 실행하는
 
     private void Awake()
     {
+        movementController = GetComponent<MainController>();
+        movementRigidboty = GetComponent<Rigidbody2D>();
+    }
+
+
+    private void Start()
+    {
         // OnmoveEvent에 Move호출
         movementController.OnMoveEnent += Move;
     }
@@ -28,5 +35,6 @@ public class MainMovement : MonoBehaviour // 실제로 움직임을 실행하는
     private void ApplyMovement(Vector2 direction)
     {
         direction = direction * 5; //캐릭터 스탯관리를 지금 개인과제에서 굳이 만들필요가 있나?
+        movementRigidboty.velocity = direction;
     }
 }
