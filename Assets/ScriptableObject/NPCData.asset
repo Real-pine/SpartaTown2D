@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPCData
   m_EditorClassIdentifier: 
   playerName: 
-  npcName: 
+  npcName: "\uD638\uBC15\uC774"
   selectedCharacterID: 0
   characterPosition: {x: 0, y: 0}
-  characterType: 0
+  characterType: 1
